@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>簡易密碼產生器</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:system-ui}
+body{max-width:520px;margin:40px auto;padding:0 20px;color:#222}
+h1{font-size:22px;margin-bottom:24px;font-weight:500}
+.box{background:#f7f7f7;padding:20px;border-radius:10px}
+.row{margin:12px 0}
+input,button{padding:10px;font-size:16px;border-radius:6px;border:1px solid #ddd}
+input{width:100%}
+button{background:#222;color:white;border:none;cursor:pointer;margin-right:8px;margin-top:8px}
+#result{margin-top:16px;padding:12px;background:white;border-radius:6px;word-break:break-all}
+</style>
+</head>
+<body>
+<h1>密碼產生器</h1>
+<div class="box">
+<div class="row">
+<label>密碼長度：</label>
+<input type="number" id="len" value="16" min="4" max="64">
+</div>
+<div>
+<button onclick="gen()">產生密碼</button>
+<button onclick="copy()">複製</button>
+</div>
+<div id="result"></div>
+</div>
+<script>
+let pwd = ""
+const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*"
+function gen(){
+  const l = Number(document.getElementById("len").value)
+  pwd = ""
+  for(let i=0;i<l;i++){
+    pwd += chars[Math.floor(Math.random()*chars.length)]
+  }
+  document.getElementById("result").innerText = pwd
+}
+function copy(){
+  if(!pwd) return
+  navigator.clipboard.writeText(pwd)
+  alert("已複製")
+}
+gen()
+</script>
+</body>
+</html>
